@@ -3,6 +3,8 @@ import './App.css';
 import rawChampions from './champions.json';
 import firebase from 'firebase';
 import {config} from './config';
+import {API_KEY, baseURL, getchamps, query} from './config';
+
 class App extends Component {
   constructor(){
     super()
@@ -15,12 +17,6 @@ class App extends Component {
   componentWillMount(){
     //initialize firebase
     firebase.initializeApp(config);
-
-
-    let API_KEY = "RGAPI-e92e6be9-6af2-4d29-b04b-eb5524bfd8b8";
-    let baseURL = "https://na1.api.riotgames.com";
-    let getchamps = "/lol/static-data/v3/champions";
-    let query = "?locale=en_US&champListData=image&tags=image&dataById=false"
 
     fetch(`${baseURL}${getchamps}${query}&api_key=${API_KEY}`)
       .then((response) => {
