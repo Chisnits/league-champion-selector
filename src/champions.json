@@ -1641,7 +1641,7 @@
           "name": "Wukong",
           "title": "the Monkey King",
           "image": {
-             "full": "MonkeyKing.png",
+             "full": "Wukong.png",
              "sprite": "champion2.png",
              "group": "champion",
              "x": 96,

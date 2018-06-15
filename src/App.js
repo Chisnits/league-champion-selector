@@ -3,86 +3,33 @@ import React, {
 } from 'react';
 import './App.css';
 import rawChampions from './champions.json';
-import firebase from 'firebase';
-import {
-  config
-} from './config';
-// import {API_KEY, baseURL, getchamps, query} from './config';
+import './App.css';
 
 class App extends Component {
   constructor() {
     super()
-
-    this.state = {
-      data: [],
-      champions: [],
-      images: [],
-      blobs: []
+    
+    this.getImages = this.getImages.bind(this);
+  }
+  getImages(){
+    let names = []
+    let images = []
+    Object.keys(rawChampions.data).forEach((key) => {
+      names.push(rawChampions.data[key].image.full)
+    })
+    for (let i = 0; i < names.sort().length; i++) {
+      images.push(<img src={require("./assets/squares/"+names[i])} alt="" className="img-responsive" key={i} />  );
     }
-  }
-  componentWillMount() {
-    //initialize firebase
-    firebase.initializeApp(config);
-
-    firebase.database().ref("champions").on("value", (snapshot) => {
-      this.setState({
-        champions: snapshot.toJSON()
-      })
-    })
-    firebase.database().ref('champions').set({
-      data: rawChampions
-    }).then(() => {
-      // console.log("inserted")
-    }).catch((error) => {
-      // console.log(error)
-    })
+        return images
   }
 
-  componentDidMount() {
-    let imgstr = this.state.champions.data.data;
-    for (let key in imgstr) {
-      fetch(`https://ddragon.leagueoflegends.com/cdn/8.12.1/img/champion/${imgstr[key].image.full}`)
-        .then((response) => {
-          return response.blob()
-        })
-        .then((myBlob) => {
-          let objectURL = URL.createObjectURL(myBlob);
-          this.setState({
-            images: [...this.state.images, objectURL]
-          })
-        }).catch(err => {
-          console.log(err)
-        })
-        firebase.database().ref("images").on("value", (snapshot) => {
-          this.setState({
-            blobs: snapshot
-          })
-        })
-
-        firebase.database().ref('images').set(
-          {
-            blobs: this.state.blobs
-          }
-      ).then(() => {
-        console.log("inserted")
-      }).catch((error) => {
-        console.log(error)
-      })
-    }
-
-    this.setState({
-      data: rawChampions.data
-    })
-  }
   render() {
-    let champSquares = this.state.images.map((item, i) => ( 
-    <span key={i}> <img src = {item} alt = "champion squares" /> </span>
-    ))
     return ( 
-    <div> 
-      {champSquares} 
-    </div>
-    );
+    <div className="wrapper">
+      <div className="square-container"> 
+        {this.getImages()}
+      </div>
+    </div>);
   }
 }
 
