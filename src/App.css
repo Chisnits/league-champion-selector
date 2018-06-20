@@ -1,18 +1,50 @@
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 }
-.square-container{
-  width: 50%;
-  height: 200px;
+.square-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  height: 51.5%;
+  width: 60%;
+  overflow-y: scroll;
 }
-.img-responsive{
-  height: 50px;
-  width: 50px;
+.img-responsive {
+  height: 65px;
+  width: 65px;
+  margin: 1px 2px;
+  border-radius: 5px;
+  border: 3px solid gray;
+}
+.allies {
+  height: 60vh;
+  width: 17vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.enemies {
+  height: 60vh;
+  width: 17vw;
+  background-color: black
+}
+.player-selector {
+  height: 9.5vh;
+  width: 225px;
+  background-color: #282828;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 9px;
+}
+.champion-selected {
+  height: 65px;
+  width: 65px;
+  border-radius: 5px;
+  background-color: red;
 }
