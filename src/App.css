@@ -18,7 +18,7 @@
   width: 65px;
   margin: 1px 2px;
   border-radius: 5px;
-  border: 3px solid gray;
+  border: 3px solid #5e5e5e;
 }
 .allies {
   height: 60vh;
@@ -36,7 +36,7 @@
 .player-selector {
   height: 9.5vh;
   width: 225px;
-  background-color: #282828;
+  background-color: #151515;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -46,5 +46,11 @@
   height: 65px;
   width: 65px;
   border-radius: 5px;
-  background-color: red;
+}
+.placeholder {
+  height: 65px;
+  width: 65px;
+  border-radius: 5px;
+  border: 3px solid #5e5e5e;
+  background-color: #050a0e;
 }
