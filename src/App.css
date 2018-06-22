@@ -54,3 +54,8 @@
   border: 3px solid #5e5e5e;
   background-color: #050a0e;
 }
+.timer {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+}

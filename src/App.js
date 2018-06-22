@@ -14,7 +14,14 @@ class App extends Component {
     this.state = {
       allySelection: null,
       allyHover: null,
-      bool: false
+      bool: false,
+      timer: 5,
+      player1: {selection:"player1"},
+      player2: {selection:"player2"},
+      player3: {selection:"player3"},
+      player4: {selection:"player4"},
+      player5: {selection:"player5"},
+      activePlayer: null
     }
     
     this.getImages = this.getImages.bind(this);
@@ -35,61 +42,102 @@ class App extends Component {
   }
   handleClick(e){
     this.setState({
-      allySelection: e.target.getAttribute('src'),
+      allySelection: e.target.getAttribute('src')
     })
   }
   handleHover(e){
     this.setState({
-      allyHover: e.target.getAttribute('src'),
-      bool: true
+      allyHover: e.target.getAttribute('src')
     })
   }
-  handleMouseOut(e){
+  handleMouseOut(){
     this.setState({ 
-      allyHover: null,
-      bool: false 
+      allyHover: null
     })
   }
-
+  componentDidMount(){
+    this.setState({
+      activePlayer: this.state.player1
+    })
+    this.myInterval = setInterval(() => {
+      this.setState({ timer: this.state.timer - 1 })
+    }, 1000);
+  }
+  componentDidUpdate(){
+    if(this.state.activePlayer === this.state.player1 && this.state.timer === 0){
+      this.setState({
+        timer: 5,
+        activePlayer: this.state.player2
+      })
+    } else if (this.state.activePlayer === this.state.player2 && this.state.timer === 0){
+      this.setState({
+        timer: 5,
+        activePlayer: this.state.player3
+      })
+    } else if (this.state.activePlayer === this.state.player3 && this.state.timer === 0){
+      this.setState({
+        timer: 5,
+        activePlayer: this.state.player4
+      }) 
+    } else if (this.state.activePlayer === this.state.player4 && this.state.timer === 0){
+      this.setState({
+        timer: 5,
+        activePlayer: this.state.player5
+      })
+    } else if (this.state.activePlayer === this.state.player5 && this.state.timer === 0){
+      clearInterval(this.myInterval)
+    }
+  }
   render() {
-    return ( 
-    <div className="wrapper">
-      <section className="allies">
-        <div className="player-selector">
-          <div className="champion-selected">
-            {
-              this.state.allySelection ? (
-                <PlayerSelection 
-                  playerSelection = {this.state.allySelection} 
-              />
-              ):(
-                <CharacterHover
-                  hover = {this.state.allyHover}
+    return (
+    <div>
+      <div className="timer">{this.state.timer}</div>
+      <section className="wrapper">
+        <section className="allies">
+          <div className="player-selector">
+            <div className="champion-selected" id="player-1">
+              {
+                this.state.allySelection ? (
+                  <PlayerSelection 
+                    playerSelection = {this.state.allySelection}
+                    activePlayer = {this.state.activePlayer} 
                 />
-              )
-            }
+                ):(
+                  <CharacterHover
+                    hover = {this.state.allyHover}
+                    activePlayer = {this.state.activePlayer}
+                  />
+                )
+              }
+            </div>
           </div>
-        </div>
-        <div className="player-selector">
-          <div className="champion-selected">
-          
+          <div className="player-selector">
+            <div className="champion-selected" id="player-2">
+            </div>
           </div>
+          <div className="player-selector">
+            <div className="champion-selected" id="player-3">
+            
+            </div>
+          </div>
+          <div className="player-selector">
+            <div className="champion-selected" id="player-4">
+            
+            </div>
+          </div>
+          <div className="player-selector">
+            <div className="champion-selected" id="player-5">
+    
+            </div>
+          </div>
+        </section>
+        <div className="square-container"> 
+          {this.getImages()}
         </div>
-        <div className="player-selector">
-          <div className="champion-selected"></div>
-        </div>
-        <div className="player-selector">
-          <div className="champion-selected"></div>
-        </div>
-        <div className="player-selector">
-          <div className="champion-selected"></div>
-        </div>
-      </section>
-      <div className="square-container"> 
-        {this.getImages()}
-      </div>
-      <section className="enemies"></section>
-    </div>);
+        <section className="enemies"></section>
+      </section>  
+    </div>
+  );
   }
 }
 

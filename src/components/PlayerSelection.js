@@ -4,9 +4,7 @@ import '../App.css';
 
 const PlayerSelections = props => {
     return (
-        <div>
             <img src={props.playerSelection} className="img-responsive" alt="Character Selected"/>
-        </div>
     );
 };
 
