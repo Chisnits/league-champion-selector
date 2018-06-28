@@ -16,11 +16,11 @@ class App extends Component {
       allyHover: null,
       bool: false,
       timer: 5,
-      player1: {selection:"player1"},
-      player2: {selection:"player2"},
-      player3: {selection:"player3"},
-      player4: {selection:"player4"},
-      player5: {selection:"player5"},
+      player1: null,
+      player2: null,
+      player3: null,
+      player4: null,
+      player5: null,
       activePlayer: null
     }
     
@@ -44,6 +44,32 @@ class App extends Component {
     this.setState({
       allySelection: e.target.getAttribute('src')
     })
+    if(this.state.activePlayer === "player1"){
+      this.setState({
+        player1: e.target.getAttribute('src'),
+        allySelection: null
+      })
+    } else if (this.state.activePlayer === "player2"){
+      this.setState({
+        player2: e.target.getAttribute('src'),
+        allySelection: null
+      })
+    } else if (this.state.activePlayer === "player3"){
+      this.setState({
+        player3: e.target.getAttribute('src'),
+        allySelection: null
+      }) 
+    } else if (this.state.activePlayer === "player4"){
+      this.setState({
+        player4: e.target.getAttribute('src'),
+        allySelection: null
+      })
+    } else if (this.state.activePlayer === "player5"){
+      this.setState({
+        player5: e.target.getAttribute('src'),
+        allySelection: null
+      })
+    }
   }
   handleHover(e){
     this.setState({
@@ -57,38 +83,39 @@ class App extends Component {
   }
   componentDidMount(){
     this.setState({
-      activePlayer: this.state.player1
+      activePlayer: "player1"
     })
     this.myInterval = setInterval(() => {
       this.setState({ timer: this.state.timer - 1 })
     }, 1000);
   }
   componentDidUpdate(){
-    if(this.state.activePlayer === this.state.player1 && this.state.timer === 0){
+    if(this.state.activePlayer === "player1" && this.state.timer === 0){
       this.setState({
         timer: 5,
-        activePlayer: this.state.player2
+        activePlayer: "player2"
       })
-    } else if (this.state.activePlayer === this.state.player2 && this.state.timer === 0){
+    } else if (this.state.activePlayer === "player2" && this.state.timer === 0){
       this.setState({
         timer: 5,
-        activePlayer: this.state.player3
+        activePlayer: "player3"
       })
-    } else if (this.state.activePlayer === this.state.player3 && this.state.timer === 0){
+    } else if (this.state.activePlayer === "player3" && this.state.timer === 0){
       this.setState({
         timer: 5,
-        activePlayer: this.state.player4
+        activePlayer: "player4"
       }) 
-    } else if (this.state.activePlayer === this.state.player4 && this.state.timer === 0){
+    } else if (this.state.activePlayer === "player4" && this.state.timer === 0){
       this.setState({
         timer: 5,
-        activePlayer: this.state.player5
+        activePlayer: "player5"
       })
-    } else if (this.state.activePlayer === this.state.player5 && this.state.timer === 0){
+    } else if (this.state.activePlayer === "player5" && this.state.timer === 0){
       clearInterval(this.myInterval)
     }
   }
   render() {
+    console.log(this.state.allySelection)
     return (
     <div>
       <div className="timer">{this.state.timer}</div>
@@ -96,38 +123,87 @@ class App extends Component {
         <section className="allies">
           <div className="player-selector">
             <div className="champion-selected" id="player-1">
-              {
-                this.state.allySelection ? (
+              { this.state.allySelection ? 
+                (
                   <PlayerSelection 
-                    playerSelection = {this.state.allySelection}
+                    playerSelection = {this.state.player1}
                     activePlayer = {this.state.activePlayer} 
-                />
-                ):(
-                  <CharacterHover
-                    hover = {this.state.allyHover}
-                    activePlayer = {this.state.activePlayer}
-                  />
+                  /> ):(
+                    <CharacterHover
+                      player1 = {this.state.player1}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
                 )
               }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-2">
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player2}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player2 = {this.state.player2}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-3">
-            
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player3}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player3 = {this.state.player3}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-4">
-            
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player4}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player4 = {this.state.player4}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-5">
-    
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player5}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player5 = {this.state.player5}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
         </section>
