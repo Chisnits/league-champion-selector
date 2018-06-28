@@ -115,10 +115,7 @@ class App extends Component {
     }
   }
   render() {
-    console.log({activePlayer: this.state.activePlayer})
-    console.log({allySelection : this.state.allySelection})
-    console.log({player1 : this.state.player1})
-    console.log({player2 : this.state.player2})
+    console.log(this.state.allySelection)
     return (
     <div>
       <div className="timer">{this.state.timer}</div>
@@ -126,35 +123,87 @@ class App extends Component {
         <section className="allies">
           <div className="player-selector">
             <div className="champion-selected" id="player-1">
-              
+              { this.state.allySelection ? 
+                (
                   <PlayerSelection 
                     playerSelection = {this.state.player1}
                     activePlayer = {this.state.activePlayer} 
-                />
-                
+                  /> ):(
+                    <CharacterHover
+                      player1 = {this.state.player1}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-2">
-            <PlayerSelection 
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
                     playerSelection = {this.state.player2}
                     activePlayer = {this.state.activePlayer} 
-                />
+                  /> ):(
+                    <CharacterHover
+                      player2 = {this.state.player2}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-3">
-            
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player3}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player3 = {this.state.player3}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-4">
-            
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player4}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player4 = {this.state.player4}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
           <div className="player-selector">
             <div className="champion-selected" id="player-5">
-    
+            { this.state.allySelection ? 
+                (
+                  <PlayerSelection 
+                    playerSelection = {this.state.player5}
+                    activePlayer = {this.state.activePlayer} 
+                  /> ):(
+                    <CharacterHover
+                      player5 = {this.state.player5}
+                      activePlayer = {this.state.activePlayer}
+                      hover = {this.state.allyHover}
+                    />
+                )
+              }
             </div>
           </div>
         </section>
